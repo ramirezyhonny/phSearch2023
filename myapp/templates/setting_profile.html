@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/styleeditprofile.css' %}">
+    <title>Setting</title>
+</head>
+<body>
+    {% include 'base.html' %}
+    {% block content %}
+    <section id="container_editprofile">
+        <div class="name_complete">
+            <h2 class="name_complete_title"> {{first_name}} {{last_name}} </h2>
+        </div>
+        <form action="" method="post" id="form_edit">
+            {% csrf_token %}
+            <div class="section_picture">
+                <!--mostrar enlace a foto de perfil-->
+                <div class="pic_user">
+                    <a href="{{ request.user.picture.url }}" target="_blank">
+                        <!--{{ user.picture.name }}-->
+                        <img src="{{ request.user.picture.url }}" alt="Mi foto de perfil" class="picture_user">
+                    </a>
+                </div>
+                <input type="file" name="picture" accept="image/*" id="id_picture">  
+            </div>
+            <div class="dates_user">
+                <div class="first_dates_user">
+                    <label for="id_username">Username: </label>
+                    <input type="text" name="username" value="{{ username }}" maxlength="150" id="id_username">
+                    <label for="id_first_name">Name: </label>
+                    <input type="text" name="first_name" value="{{ first_name }}" maxlength="150" id="id_first_name">
+                    <label for="id_last_name">Last name: </label>
+                    <input type="text" name="last_name" value="{{ last_name }}" maxlength="150" id="id_last_name">
+                </div>
+                <div class="second_dates_user">
+                    <label for="id_email">E-mail: </label>
+                    <input type="email" name="email" value="{{ email }}"  id="id_email">
+                    <label for="id_country">Country: </label>
+                    <select id="id_country" onchange="loadProvinces()" name="country">
+                        <option value=""> {{ country }} </option>
+                        <option value="Espana">España</option>
+                        <option value="Francia">Francia</option>
+                        <option value="Italia">Italia</option>
+                        <option value="Alemania">Alemania</option>
+                        <option value="ReinoUnido">Reino Unido</option>
+                        <option value="EstadosUnidos">Estados Unidos</option>
+                        <option value="Canada">Canadá</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Japon">Japón</option>
+                        <option value="China">China</option>
+                        <option value="India">India</option>
+                        <option value="Mexico">México</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Peru">Perú</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="CostaRica">Costa Rica</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Panama">Panamá</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="RepublicaDominicana">República Dominicana</option>
+                    </select>
+                    <label for="id_province">Province: </label>
+                    <select id="id_province" name="provinces">
+                        <option value=""> {{ provinces }} </option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="save_button">Save</button>
+        </form>
+    </section>
+    {% endblock %}
+    <script src="{% static '/js/scriptsa.js' %}"></script>
+</body>
+</html>

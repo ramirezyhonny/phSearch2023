@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/stylebase.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <div class="icon_title"><a href="/"><h2><span>ph</span>Search</h2></a></div>
+            <ul id="list">
+                <li><a href="/"  class="link_nav">Home</a></li>
+                <li><a href="/about" class="link_nav">About</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="/logout" class="link_nav">Log out</a></li>
+                {% else %}
+                <li><a href="/signin" class="link_nav">Sign in</a></li>
+                <li><a href="/signup" class="link_nav">Sign up</a></li>
+                {% endif %}
+            </ul>
+            <button id="buttonresp"><img src="{% static '/images/menuresp.svg' %}" alt="menu" class="menupic"></button>
+
+            {% if user.is_authenticated %}
+            <div class="items">
+                <div class="theme"><button id="themebutton" onclick="themedark()"><img src="{% static '/images/darkmode.svg' %}" alt=""></button></div>
+                <a href="#" id="profile_link"><img src="{% static '/images/user.svg' %}" alt="user_pic" class="usersvg"></a>
+                <div class="ms">
+                    <a href="#"><img src="{% static '/images/message.svg' %}" alt="message_pic" class="messsvg"></a>
+                    <div class="contmassage">0</div>
+                </div>
+            </div>
+            {% endif %}
+        </nav>
+    </header>
+    <ul id="listresp">
+        <li><a href="/"  class="link_nav">Home</a></li>
+        <li><a href="/about" class="link_nav">About</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="/logout" class="link_nav">Log out</a></li>
+        {% else %}
+        <li><a href="/signin" class="link_nav">Sign in</a></li>
+        <li><a href="/signup" class="link_nav">Sign up</a></li>
+        {% endif %}
+    </ul>
+    {% if user.is_authenticated %}
+    <div id="profile_container" style="display: none;">
+        <div class="close_profile">
+            <button id="butt_close"><img src="{% static '/images/close.svg' %}" alt="close_pic"></button>
+        </div>
+        <div class="img_profile">
+            <img src= "{{ user.picture.url }}" alt="ccdc" class="defaultprofile">
+        </div>
+        <div class="username">
+            {% if username %}
+            <h2>{{ username }}</h2>
+            {% endif %}
+        </div>
+        <div class="list_option">
+            <ul>
+                <li><img src="{% static '/images/profile2.svg' %}" alt="profile_pic" class="settings"><a href="/myprofile" class="opt_link">My Profile</a></li>
+                <li><img src="{% static '/images/setting.svg' %}" alt="setting_pic" class="settings" id="rotatesetting"><a href="/editProfile" class="opt_link">Account Settings</a></li>
+                <li><img src="{% static '/images/calendar.svg' %}" alt="calendar_pic" class="settings" id="calendar"><a href="#" class="opt_link">Reservations</a></li>
+                <li><img src="{% static '/images/chat.svg' %}" alt="chat_pic" class="settings" id="chat"><a href="#" class="opt_link">Chat</a></li>
+            </ul>
+        </div>
+    </div>
+    {% endif %} 
+    {% block content %}
+    {% endblock %}
+    <script src="{% static '/js/scriptbase.js' %}"></script>
+</body>
+</html>

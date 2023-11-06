@@ -1,0 +1,39 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/stylehome.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    {% include "base.html" %}
+    
+    {% block content %}
+    <section id="container">
+        {% if user.is_authenticated %}
+        <div id="welcome" class="welcome">
+            <p id="welcome_user">Hi, welcome {{username}} 😊!</p>
+        </div>
+        {% endif %}
+        <div id="presentation">
+            <img src="{% static '/images/image1.svg' %}" alt="" class="backimg">
+            <div class="text_overlay">
+                <h2>New method</h2>
+                <h1>Photographers Collection</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt perspiciatis, quaerat recusandae officia voluptas, excepturi veritatis laboriosam placeat nemo in, a autem dolorum possimus sapiente laborum magni minus quos alias?</p>
+                {% if user.is_authenticated %}
+                <a href="/search" class="but1" ><span>Search Now</span><img src="{% static '/images/arrowr.svg' %}" alt="arrow_right_pic" class="arrowrpic"></a>
+                {% endif %}
+            </div>
+        </div>
+        <div id="adorn">
+            <img src="{% static '/images/computer.png' %}" alt="pic_computer" class="imgcompu">
+        </div>
+    </section>
+    {% endblock %}
+    <script src="{% static '/js/scripthome.js' %}"></script>
+</body>
+</html>

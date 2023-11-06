@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/stylesignin.css' %}">
+    <title>Signin</title>
+</head>
+<body>
+    {% include 'base.html' %}
+    {% block content %}
+    {{error}}
+    <section id="container_form">
+        <h1>Welcome to phSearch</h1>
+        <form action="/signin/" method="post" id="form_signin">
+            {% csrf_token %}
+            <!--{{form}}-->
+            <label for="id_username">Username:</label>
+            <input type="text" name="username" id="id_username" required placeholder="Your username...">
+            <label for="id_password">Password:</label>
+            <div id="passwordcont">
+                <input type="password" name="password" id="id_password" placeholder="Your password...">
+                <span id="togglePassword" class="eye-icon" onclick="togglePasswordVisibility()"><img src="{% static '/images/eyeopen.svg' %}" alt="eye" class="eye_open"></span>
+            </div>
+            <button>Sign in</button>
+        </form>
+        <div class="passworderror">
+            <div class="remem">
+                <input type="checkbox" name="remember" id="remember">Remember me
+            </div>
+            <a href="#" class="forgotlink">Forgot password?</a>
+        </div>
+    </section>
+    {% endblock %}
+    <script src="{% static '/js/scriptsignin.js' %}"></script>
+</body>
+</html>

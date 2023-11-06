@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/stylesearch.css' %}">
+    <title>Search</title>
+</head>
+<body>
+    {% include 'base.html' %}
+    {% block content %}
+    <form action="{% url 'search' %}" method="get">
+        <div class="cont">
+            <input type="search" id="search" name="q" placeholder="Search now your photographer...">
+            <button id="button_search" type="submit"><img src="{% static '/images/search.svg' %}" alt="pic_search" class="pic_search"></button>
+        </div>
+        {% if users %}
+        <button type="button" id="clear" class="buttonclear"><img src="{% static '/images/clear.svg' %}" alt="clear_pic" class="clear_img"></button>
+        {% endif %}
+    </form>
+    {% if query %}
+        {% if users %}
+        <div id="results">
+            <div class="result_list">
+                {% for user in users %}
+                <div class="result">
+                    <div class="perfil_img"><img src="{{ user.picture.url }}" alt="profilepic" class="profilepic"></div>
+                    <div class="info_user">
+                        <h2 class="name_user">{{ user.first_name }} {{ user.last_name }}</h2>
+                        <p class="description">San Rafael-Mendoza</p>
+                        <div class="rate_content">
+                            <div class="rate"><h2>5</h2></div>
+                            <div class="stars_rate">
+                                <img src="{% static '/images/star.svg' %}" alt="star_pic" class="star_rate">
+                                <img src="{% static '/images/star.svg' %}" alt="star_pic" class="star_rate">
+                                <img src="{% static '/images/star.svg' %}" alt="star_pic" class="star_rate">
+                                <img src="{% static '/images/star.svg' %}" alt="star_pic" class="star_rate">
+                                <img src="{% static '/images/star.svg' %}" alt="star_pic" class="star_rate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="error">
+                <p>No results matching "{{ query }}"</p>
+            </div>
+        </div> 
+        {% endif %}
+    {% endif %}
+    <a href="/avance_search" class="avancesearch_link">
+        <span>Avance Search</span>
+    </a>
+    {% endblock %}
+    <script src="{% static '/js/scriptsearch.js' %}"></script>
+</body>
+</html>

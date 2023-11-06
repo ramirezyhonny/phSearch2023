@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/stylesignup.css' %}">
+    <title>Sign up</title>
+</head>
+<body>
+    {% include 'base.html' %}
+    {% block content %}
+    {{error}}
+    <section id="container_form">
+        <h1>Welcome!</h1>
+        <form method="post" id="formsignup" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="beforeform">
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" id="id_username">
+                <label for="id_first_name">First Name:</label>
+                <input type="text" name="first_name" id="id_first_name">
+                <label for="id_last_name">Last Name: </label>
+                <input type="text" name="last_name" maxlength="30" required="" id="id_last_name">
+                <label for="id_email">Email:</label>
+                <input type="email" name="email" maxlength="254" required="" id="id_email">
+                <label for="id_password1">Create password: </label>
+                <input type="password" name="password1" id="id_password1">
+                <label for="id_password2">Confirm password: </label>
+                <input type="password" name="password2" id="id_password2">
+            </div>
+
+            <div class="afterform">
+                <div class="cont_usertype">
+                    <fieldset>
+                        <legend>Select your usertype: </legend>
+                        <div class="radio">
+                            <input type="radio" id="client" name="usertype" value="client">
+                            <label for="client">Client</label>
+                        </div>
+                        <div class="radio">
+                            <input type="radio" id="photographer" name="usertype" value="photographer">
+                            <label for="photographer">Photographer</label>
+                        </div>
+                    </fieldset>
+
+                </div>
+                <label for="id_country">Country:</label>
+                <select id="id_country" onchange="loadProvinces()" name="country">
+                    <option value="">Select your country</option>
+                    <option value="Espana">España</option>
+                    <option value="Francia">Francia</option>
+                    <option value="Italia">Italia</option>
+                    <option value="Alemania">Alemania</option>
+                    <option value="ReinoUnido">Reino Unido</option>
+                    <option value="EstadosUnidos">Estados Unidos</option>
+                    <option value="Canada">Canadá</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Japon">Japón</option>
+                    <option value="China">China</option>
+                    <option value="India">India</option>
+                    <option value="Mexico">México</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Brasil">Brasil</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Peru">Perú</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Uruguay">Uruguay</option>
+                    <option value="Paraguay">Paraguay</option>
+                    <option value="Bolivia">Bolivia</option>
+                    <option value="CostaRica">Costa Rica</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Honduras">Honduras</option>
+                    <option value="Nicaragua">Nicaragua</option>
+                    <option value="Panama">Panamá</option>
+                    <option value="Cuba">Cuba</option>
+                    <option value="RepublicaDominicana">República Dominicana</option>
+                    <!-- Agrega más países aquí -->
+                </select>
+                <label for="id_province">Province:</label>
+                <select id="id_province" name="provinces">
+                    <option value="">Select your province</option>
+                </select>
+                <div class="section_pic">
+                    <label for="id_picture">Upload a profile photo: (opcional)</label>
+                    <input type="file" name="picture" accept="image/*" id="id_picture">
+                </div>
+                <button>Sign Up</button>
+            </div>
+            
+        </form>
+    </section>
+    {% endblock %}
+    <script src="{% static '/js/scriptsa.js' %}"></script>
+</body>
+</html>

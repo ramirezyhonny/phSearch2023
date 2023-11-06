@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/styleavance_search.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    {% include 'base.html' %}
+    {% block content %}
+    <section id="container">
+        <div class="form">
+            <h2 class="title_filter">Filter</h2>
+            <form  method="get" id="form_search_av" action="{% url 'avance_search' %}">
+                <div class="cont">
+                    <input type="search" id="username" name="username" placeholder="Search by username..." >
+                    <input type="search" id="email" name="email" placeholder="Search by email..." >
+                    <!--input to country and province-->
+                    <select id="id_country" onchange="loadProvinces()" name="country">
+                        <option value="">Select country</option>
+                        <option value="Espana">España</option>
+                        <option value="Francia">Francia</option>
+                        <option value="Italia">Italia</option>
+                        <option value="Alemania">Alemania</option>
+                        <option value="ReinoUnido">Reino Unido</option>
+                        <option value="EstadosUnidos">Estados Unidos</option>
+                        <option value="Canada">Canadá</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Japon">Japón</option>
+                        <option value="China">China</option>
+                        <option value="India">India</option>
+                        <option value="Mexico">México</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Peru">Perú</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="CostaRica">Costa Rica</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Panama">Panamá</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="RepublicaDominicana">República Dominicana</option>
+                        <!-- Agrega más países aquí -->
+                    </select>
+                    <select id="id_province" name="provinces">
+                        <option value="">Select province</option>
+                    </select>
+                    <select name="specialty" id="id_specialty">
+                        <option value="">Select specialty</option>
+                    </select>
+                </div>
+                <div class="buttons_form">
+                    <button id="button_search" type="submit" class="button_search">search</button>
+                    {% if users %}
+                    <button type="button" id="clear" class="buttonclear">clear</button>
+                    {% endif %}
+                </div>
+            </form>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                const clearButton = document.getElementById("clear");
+                    if(clearButton){
+                        clearButton.addEventListener("click", function() {
+                         window.location.href = "/avance_search/";
+                        });
+                    }
+                });
+            </script>
+        </div>
+        <div id="results" class="results">
+            <div class="title_search">
+                <h2>Photographers</h2>
+            </div>
+            <div class="cant_users">
+                <div class="counter">
+                    {% if users %}
+                    <p> {{cant_results}} <span>{{cant_text}}</span></p>
+                    {% endif %}
+                </div>
+                <div class="order_list">
+                    <select name="order" id="id_order">
+                        <option value="Date descending">Date descending</option>
+                        <option value="Data ascending">Date ascending</option>
+                    </select>
+                </div>
+            </div>
+            {% if users %}
+            <div class="results_cont">
+                {% for user in users %}
+                <div class="user-info">
+                    <div class="photo_info" id="photo_info">
+                        <img src="{% static '/images/estadoejemplo.jpg' %}" alt="estado" class="estadoimg">
+                        <div class="info_into_pic" id="info_into_pic" >
+                            <div class="personal_dates1">
+                                <div class="info_into_pic_profile">
+                                    {% if user.picture %}
+                                    <img src="{{ user.picture.url }}" alt="pic_user" class="pic_user_profile">
+                                    {% else %}
+                                    <img src="{% static '/images/default_profile.jpg' %}" alt="default_pic" class="pic_user_profile">
+                                    {% endif %}
+                                </div>
+                                <div class="dates_the_user">
+                                    <p class="name_complete_pri"> {{user.first_name}}, {{user.last_name}} </p>
+                                    <p>Posted on 05/09/2023</p>
+                                </div>
+                            </div>
+                            <div class="personal_dates2">
+                                <div class="dates">
+                                    <div class="d">20 y.o</div>
+                                    <div class="d">
+                                        <img src="{% static '/images/calendar.svg' %}" alt="" class="item_date">
+                                        <p>Available</p>
+                                    </div>
+                                </div>
+                                <div class="dates">
+                                    <div><p><span>XP</span> 7 years</p></div>
+                                    <div><a href="#">view more...</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="name_complete" id="name_complete">
+                            <h3> {{user.first_name}} {{user.last_name}} </h3>
+                        </div>
+                    </div>
+                    <div class="dates_user">
+                        <div class="primary_date_user">
+                            <p>Email: {{ user.email }}</p>
+                        </div>
+                        <div class="ubication">
+                            <img src="{% static '/images/location.svg' %}" alt="location_log" class="location_pic">
+                            <p> {{user.country}}, {{user.provinces}} </p>
+                        </div>
+                    </div>
+                </div>     
+                {% endfor %}  
+            {% endif %}
+            {% if no_results %}
+                <p id="no-results" style="display: none;">No se encontraron resultados que coincidan con los criterios de búsqueda.</p>
+            {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+    <script src="{% static '/js/scriptsa.js' %}"></script>
+    <script src="{% static '/js/scriptavsearch.js' %}"></script>
+</body>
+</html>

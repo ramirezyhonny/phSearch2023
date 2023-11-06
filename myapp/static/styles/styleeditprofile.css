@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(215, 217, 219);
+}
+#container_editprofile{
+    background-color: #fff;
+    padding: 40px;
+    position: absolute;
+    margin-top: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.name_complete{
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+    font-size: 20px;
+    color: gray;
+}
+#form_edit{
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: auto;
+    gap: 20px;
+}
+.section_picture{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.pic_user{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.picture_user{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.dates_user{
+    display: flex;
+    gap: 10px;
+
+    & input,select{
+        width: 100%;
+        height: 50px;
+        border: none;
+        -webkit-box-shadow: 0px 8px 7px -6px rgba(0,0,0,0.44);
+        -moz-box-shadow: 0px 8px 7px -6px rgba(0,0,0,0.44);
+        box-shadow: 0px 8px 7px -6px rgba(0,0,0,0.44);
+        font-weight: bold;
+        padding: 0 10px;
+    }
+    & label{
+        color: gray;
+    }
+}
+.first_dates_user{
+
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.second_dates_user{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 10px;
+}
+.save_button{
+    width: 150px;
+    height: 40px;
+    margin: auto;
+    border: none;
+    background-color: rgb(237, 110, 139);
+    border-radius: 50px;
+    color: #fff;
+    font-weight: bold;
+}
+button{
+    cursor: pointer;
+}
+

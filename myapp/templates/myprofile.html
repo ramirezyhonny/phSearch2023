@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/stylemyprofile.css' %}">
+    <title>Perfil</title>
+</head>
+<body>
+    {% include 'base.html' %}
+    {% block content %}
+    <h1>My Profile</h1>
+    <section id="container_profile" class="container_profile">
+        <h2>Profile</h2>
+        <div id="information">
+            <div class="principal_dates">
+                <div class="photo_perfil">
+                    <div class="photo"><img src="{{ user.picture.url }}" alt="def_profile"></div>
+                    <p class="alert">Your profile photo is public. <img src="{% static '/images/alert.svg' %}" alt="alert_pic" class="alert_pic"></p>
+                </div>
+                <div class="dates_user"> 
+                    <ul>
+                        <li>Firts Name<span>{{ first_name }}</span></li>
+                        <li>Last Name<span>{{ last_name }}</span></li>
+                        <li>Email<span class="emailspan">{{ email }}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="about_me">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, iste nam explicabo vel perspiciatis asperiores! Officiis quia fugit est, possimus provident nulla nisi, totam ratione sit non dolores? Repellat, debitis.</p>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+
+</body>
+</html>
