@@ -123,12 +123,12 @@
                                 </div>
                                 <div class="dates">
                                     <div><p><span>XP</span> 7 years</p></div>
-                                    <div><a href="#">view more...</a></div>
+                                    <div><a href="{% url 'photographer_detail' pk=user.id %}">Ver más</a></div>
                                 </div>
                             </div>
                         </div>
                         <div class="name_complete" id="name_complete">
-                            <h3> {{user.first_name}} {{user.last_name}} </h3>
+                            <h3> {{user.first_name}}</h3>
                         </div>
                     </div>
                     <div class="dates_user">

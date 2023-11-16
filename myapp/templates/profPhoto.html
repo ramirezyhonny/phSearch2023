@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static '/styles/style_profPhoto.css' %} ">
+    <title>Photographer</title>
+</head>
+<body>
+    {% include 'base.html' %}
+    {% block content %}
+    <section id="container">
+        <div class="first_date_section">
+            <div class="name_last_first">
+                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                <p> {{user.provinces}}, {{user.country}} </p>
+                <div class="icon_pho">
+                    <p>PHO</p>
+                </div>
+            </div>
+        </div>
+        <div class="second_date_section">
+            <div class="second_date_section_photo">
+                <img src="{{ user.picture.url }}" alt="pic" class="img_profile">
+                <div class="contact">
+                    <button><p>Agregar</p></button>
+                    <button class="button_more"><img src="{% static '/images/more_dates.svg' %}" alt="more_pic"></button>
+                </div>
+            </div>
+            <div class="second_date_section_photo_moreDates">
+                <h2>About</h2>
+                <p class="description_pho">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi debitis corporis quia, quibusdam mollitia, obcaecati tempora sapiente dignissimos dicta fuga.
+                </p>
+                <div class="second_date_section_photo_moreDates_stadistics">
+                    <div class="statistic"><div class="title_date">Rating</div><div class="title_date">4.5</div></div>
+                    <div class="statistic"><div class="title_date">Rating</div><div class="title_date">4.5</div></div>
+                    <div class="statistic"><div class="title_date">Rating</div><div class="title_date">4.5</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--<div class="details">
+        <p>Nombre: {{ user.first_name }} {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>País: {{ user.country }}</p>
+        <p>Provincias: {{ user.provinces }}</p>
+        <p>ID: {{ user.id}} </p>
+        <p>Username: {{ user.username }}  </p>
+        <p>Id ph: {{user.photographer.id}} </p>
+    </div>-->
+    {% endblock %}
+</body>
+</html>

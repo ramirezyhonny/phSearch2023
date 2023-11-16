@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from user.models import User, userPhotographer
 from django.db import IntegrityError
+from django.shortcuts import render, get_object_or_404
 #propio formulario
 from .forms import CustomUserCreationForm
 #edit profile
@@ -175,7 +176,7 @@ def avance_search(request):
 
         if query_username or query_email or query_country or query_provinces or query_specialty:
             # Si se proporcionaron parámetros de búsqueda, realizamos la consulta.
-            users = User.objects.all()  # Consulta inicial que incluye a todos los usuarios.
+            users = User.objects.filter(usertype='photographer')  # Consulta inicial que incluye a todos los usuarios.
             if query_username:
                 users = users.filter(username__icontains=query_username)
             if query_email:
@@ -203,3 +204,7 @@ def avance_search(request):
         'cant_results':cant_results,
         'cant_text':cant_text
     })
+def photographer_detail(request, pk):
+    user = get_object_or_404(User, pk=pk, usertype='photographer')
+    photographer_details = get_object_or_404(userPhotographer, user=user)
+    return render(request, 'profPhoto.html', {'user': user, 'photographer_details': photographer_details})
